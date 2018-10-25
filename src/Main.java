@@ -1,15 +1,54 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Main {
 
     public static void main(String[] args) {
-        int[] ins = {1, 2, 5, 3, 4, 0, 6, 7, 8};
-        Table table = new Table(ins);
-        table.display();
-        print(table.move(0,0,Direction.Right));
-        table.display();
-        //table.getPreState().display();
-        print(table.move(1,1,Direction.Right));
-        table.display();
-        table.getPreState().display();
+        int[] ins = {1, 2,5, 3, 4, 0, 6, 7, 8};
+        int [] goal = {0,1,2,3,4,5,6,7,8};
+        BFS bfs;
+        bfs = new BFS();
+        DFS dfs;
+        dfs = new DFS();
+        System.out.println("BFS");
+        ArrayList<Table> ans_bfs = bfs.search(ins,goal);
+        System.out.println("..............");
+
+        System.out.println("DFS");
+
+        ArrayList<Table> ans_dfs = dfs.search(ins,goal);
+
+//        for (int i=0;i< ans.size();i++){
+//            System.out.println("..........");
+//            ans.get(i).display();
+//
+//        }
+//        Table table = new Table(ins);
+//        int [] parent = {1,2,0,3,4,5,6,7,8};
+//        //table.setPreState(new Table(parent));
+//
+//        Table table1 = new Table(ins);
+//        HashSet <Table> ss = new HashSet<Table>();
+//        ss.add(table);
+//        ss.add(table1);
+//        System.out.println(ss.size());
+//        table.display();
+//
+//        ArrayList<Table> neigbours = new ArrayList<Table>();
+//         //   System.out.println("hi");
+//            neigbours = table.getNeighbours();
+//            for(int i=0;i<neigbours.size()
+//                    ;i++){
+//                System.out.println("................");
+//                neigbours.get(i).display();
+//            }
+
+//        print(table.move(0,0,Direction.Right));
+//        table.display();
+//        //table.getPreState().display();
+//        print(table.move(1,1,Direction.Right));
+//        table.display();
+//        table.getPreState().display();
 /*
         print(table.move(0,1,Direction.Down));
 

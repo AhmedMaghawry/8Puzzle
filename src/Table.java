@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Table {
 
     private Table preState;
@@ -36,25 +39,25 @@ public class Table {
 
         switch (direction) {
             case Left:
-                if (col == 0 || content[row][col - 1] != 0)
+                if (col == 0 )
                     return false;
                 else
                     swap(row, col, row, col - 1);
                 break;
             case Right:
-                if (col == (table_size - 1) || content[row][col + 1] != 0)
+                if (col == (table_size - 1) )
                     return false;
                 else
                     swap(row, col, row, col + 1);
                 break;
             case Top:
-                if (row == 0 || content[row - 1][col] != 0)
+                if (row == 0 )
                     return false;
                 else
                     swap(row, col, row - 1, col);
                 break;
             case Down:
-                if (row == (table_size - 1) || content[row + 1][col] != 0)
+                if (row == (table_size - 1))
                     return false;
                 else
                     swap(row, col, row + 1, col);
@@ -64,11 +67,8 @@ public class Table {
     }
 
     private void swap(int row, int col, int row1, int col1) {
-        try {
+
             preState = (Table) this.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
         int temp = content[row][col];
         content[row][col] = content[row1][col1];
         content[row1][col1] = temp;
@@ -99,11 +99,43 @@ public class Table {
         this.content = content;
     }
 
-    @Override
-    protected Table clone() throws CloneNotSupportedException {
+
+    public Table clone()  {
         int [] l = from_2d_to_1d(content);
         Table copy = new Table(l);
         copy.setPreState(this.preState);
         return copy;
+    }
+    public Point spaceIndex () {
+        for (int i = 0; i < this.table_size; i++) {
+            for (int j = 0; j < this.table_size; j++) {
+                if (this.content[i][j] == 0) {
+                    return (new Point(i, j));
+                }
+            }
+        }
+        return null;
+    }
+    public ArrayList <Table> getNeighbours()  {
+        Point index = this.spaceIndex();
+        ArrayList <Table> neighbours= new ArrayList<Table>();
+        for (Direction dir : Direction.values()) {
+           Table currentTable = this.clone();
+            if(currentTable.move(index.x,index.y,dir)){
+                currentTable.setPreState(this);
+                neighbours.add(currentTable);
+            }
+        }
+        return neighbours;
+    }
+    public boolean isEqualPuzzle (Table table){
+        for (int i = 0; i < this.table_size; i++) {
+            for (int j = 0; j < this.table_size; j++) {
+                if (this.content[i][j] != table.content[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return  true;
     }
 }
