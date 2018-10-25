@@ -5,18 +5,22 @@ public class Main {
 
     public static void main(String[] args) {
         int[] ins = {1, 2,5, 3, 4, 0, 6, 7, 8};
-        int [] goal = {0,1,2,3,4,5,6,7,8};
+        int [] goal = {1,2,3,4,5,6,7,8,0};
         BFS bfs;
-        bfs = new BFS();
-        DFS dfs;
-        dfs = new DFS();
-        System.out.println("BFS");
-        ArrayList<Table> ans_bfs = bfs.search(ins,goal);
-        System.out.println("..............");
-
-        System.out.println("DFS");
-
-        ArrayList<Table> ans_dfs = dfs.search(ins,goal);
+        
+        System.out.println("Astar");
+        AStare a=new AStare();
+        ArrayList<Table> ans_Astare = a.search(ins,goal);
+//        bfs = new BFS();
+//        DFS dfs;
+//        dfs = new DFS();
+//        System.out.println("BFS");
+//        ArrayList<Table> ans_bfs = bfs.search(ins,goal);
+//        System.out.println("..............");
+//
+//        System.out.println("DFS");
+//
+//        ArrayList<Table> ans_dfs = dfs.search(ins,goal);
 
 //        for (int i=0;i< ans.size();i++){
 //            System.out.println("..........");
