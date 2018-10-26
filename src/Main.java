@@ -10,17 +10,17 @@ public class Main {
         
         System.out.println("Astar");
         AStare a=new AStare();
-        ArrayList<Table> ans_Astare = a.search(ins,goal);
-//        bfs = new BFS();
-//        DFS dfs;
-//        dfs = new DFS();
-//        System.out.println("BFS");
-//        ArrayList<Table> ans_bfs = bfs.search(ins,goal);
-//        System.out.println("..............");
-//
-//        System.out.println("DFS");
-//
-//        ArrayList<Table> ans_dfs = dfs.search(ins,goal);
+        a.search(ins,goal);
+        bfs = new BFS();
+        DFS dfs;
+        dfs = new DFS();
+        System.out.println("BFS");
+        bfs.search(ins,goal);
+        System.out.println("..............");
+
+        System.out.println("DFS");
+
+        dfs.search(ins,goal);
 
 //        for (int i=0;i< ans.size();i++){
 //            System.out.println("..........");

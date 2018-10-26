@@ -7,7 +7,7 @@ public class DFS implements Search {
         Stack<Table> frontier = new Stack<Table>();
         ArrayList<Table> explored = new ArrayList<Table>();
 
-        public ArrayList<Table> search(int[] initial_state, int[] goalState) {
+        public void search(int[] initial_state, int[] goalState) {
 
             frontier.add(new Table(initial_state));
             while (!frontier.isEmpty()) {
@@ -15,9 +15,14 @@ public class DFS implements Search {
                 explored.add(state);
 
                 if (state.isEqualPuzzle(new Table(goalState))) {
-                    printPath(state,explored,initial_state);
-                    return explored;
+                    printPath(state, explored, initial_state);
+                    return;
                 }
+                if (explored.size()>20000){
+                    System.out.println("Early Stop,Explored nodes exceeded 20000 ");
+                    return;
+                }
+
                 for (int i = 0; i < state.getNeighbours().size(); i++) {
                     Table successor = state.getNeighbours().get(i);
                     if (isInExplorer(successor) || isInFrontier(successor)) {
@@ -28,7 +33,6 @@ public class DFS implements Search {
                     }
                 }
             }
-            return null;
         }
 
         private boolean isInFrontier(Table table) {

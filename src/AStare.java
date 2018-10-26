@@ -34,7 +34,7 @@ public class AStare implements Search {
 	PriorityQueue<Table> frontier = new PriorityQueue<Table>(tableComparator);
 	ArrayList<Table> explored = new ArrayList<Table>();
 
-	public ArrayList<Table> search(int[] initial_state, int[] goalState) {
+	public void  search(int[] initial_state, int[] goalState) {
 
 		frontier.add(new Table(initial_state));
 
@@ -45,7 +45,11 @@ public class AStare implements Search {
 
 			if (state.isEqualPuzzle(new Table(goalState))) {
 				printPath(state, explored, initial_state);
-				return explored;
+				return;
+			}
+			if (explored.size()>20000){
+				System.out.println("Early Stop,Explored nodes exceeded 20000 ");
+				return;
 			}
 			ArrayList<Table> neigbours = state.getNeighbours();
 			for (int i = 0; i < neigbours.size(); i++) {
@@ -58,7 +62,6 @@ public class AStare implements Search {
 				}
 			}
 		}
-		return null;
 	}
 
 	private boolean updateFrontier(Table table) {

@@ -4,7 +4,7 @@ public class BFS implements Search {
 	Queue<Table> frontier = new LinkedList<Table>();
 	ArrayList<Table> explored = new ArrayList<Table>();
 
-	public ArrayList<Table> search(int[] initial_state, int[] goalState) {
+	public void search(int[] initial_state, int[] goalState) {
 
 		frontier.add(new Table(initial_state));
 		while (!frontier.isEmpty()) {
@@ -13,8 +13,12 @@ public class BFS implements Search {
 
 			if (state.isEqualPuzzle(new Table(goalState))) {
 				printPath(state, explored, initial_state);
-				return explored;
+				return;
 			}
+			if (explored.size()>20000) {
+                System.out.println("Early Stop,Explored nodes exceeded 20000 ");
+                return;
+            }
 			ArrayList<Table> neigbours = state.getNeighbours();
 			for (int i = 0; i < neigbours.size(); i++) {
 				Table successor = neigbours.get(i);
@@ -26,7 +30,6 @@ public class BFS implements Search {
 				}
 			}
 		}
-		return null;
 	}
 
 	private boolean isInFrontier(Table table) {
